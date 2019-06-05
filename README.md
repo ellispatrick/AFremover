@@ -80,13 +80,6 @@ df <- afMeasure(im1, im2, mask)
 
 ## Clustering with estimated k.
 afMask <- afIdentify(mask, df, minSize = 100, maxSize = Inf, k = 20, kAuto = TRUE)
-#> Warning: empty cluster: try a better set of initial centers
-
-#> Warning: empty cluster: try a better set of initial centers
-
-#> Warning: empty cluster: try a better set of initial centers
-
-#> Warning: empty cluster: try a better set of initial centers
 
 
 ## Remove autofluorescence from images
@@ -96,7 +89,8 @@ im1AFRemoved[afMask != 0] <- quantile(im1,0.25)
 im2AFRemoved[afMask != 0] <- quantile(im2,0.25)
 
 combinedRemoved <- EBImage::rgbImage(green = im1AFRemoved, red = im2AFRemoved)
-EBImage::display(combinedRemoved, all = TRUE, method = 'raster')
+img_comb = EBImage::combine(combined, combinedRemoved)
+EBImage::display(img_comb, all = TRUE, method = 'raster')
 ```
 
 ![](man/figures/README-unnamed-chunk-2-2.png)<!-- -->
@@ -109,11 +103,7 @@ EBImage::display(combinedRemoved, all = TRUE, method = 'raster')
 exclude1 = unique(mask1[afMask>0])
 mask1Removed = mask1
 mask1Removed[mask1Removed==exclude1] = 0
-#> Warning in e1@.Data == e2: longer object length is not a multiple of
-#> shorter object length
 exclude2 = unique(mask2[afMask>0])
 mask2Removed = mask2
 mask2Removed[mask2Removed==exclude2] = 0
-#> Warning in e1@.Data == e2: longer object length is not a multiple of
-#> shorter object length
 ```

@@ -86,7 +86,8 @@ im1AFRemoved[afMask != 0] <- quantile(im1,0.25)
 im2AFRemoved[afMask != 0] <- quantile(im2,0.25)
 
 combinedRemoved <- EBImage::rgbImage(green = im1AFRemoved, red = im2AFRemoved)
-EBImage::display(combinedRemoved, all = TRUE, method = 'raster')
+img_comb = EBImage::combine(combined, combinedRemoved)
+EBImage::display(img_comb, all = TRUE, method = 'raster')
 
 ##Or
 ##Exclude AF ROIs
