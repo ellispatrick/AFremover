@@ -187,16 +187,15 @@ afIdentify <- function(mask, df, minSize = 100, maxSize = Inf, corr = -1, kAuto 
 
       d <- d1 - d2 + d3
 
-      kBest <- which.max(d)-2
-
-      clustAF <- clusterResults[[kBest]] == afClustNum[kBest]
+     kBest <- which.max(d)-1
+     clustAF <- clusterResults[[kBest]] == afClustNum[kBest]
 
 
     } else {
       dataCluster <-
         kmeans(
           dfToCluster[, cols],
-          kVals[i],
+          k,
           nstart = 20,
           iter.max = 10000,
           algorithm = 'Lloyd'
