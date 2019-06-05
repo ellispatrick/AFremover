@@ -32,6 +32,7 @@ GLMs.
 
 ``` r
 library(AFremover)
+set.seed(51773)
 ## Read in images.
 imageFile1 = system.file("extdata","ImageB.CD3.tif", package = "AFremover")
 imageFile2 = system.file("extdata","ImageB.CD11c.tif", package = "AFremover")
