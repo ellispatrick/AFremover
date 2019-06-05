@@ -17,19 +17,6 @@ devtools::install_github("ellispatrick/AFremover")
 
 ## A quick example
 
-Suppose we have a data with 100 rows and 10 variables, and we wish to
-perform an exhaustive variable selection using the classical logistic
-model. Exhaustive variable selection is known to be time consuming, so
-this might take a long time. APES is a variable selection method that
-first converts the logistic model into a linear model first and then
-uses a best-subset algorithm (such as leaps or mixed integer
-optimisation) to search for the best linear model to obtain the best
-variables. These selected variables in the linear space then represents
-the best model for the original logistic model.
-
-The application of APES is not restricted to logistic model but to all
-GLMs.
-
 ``` r
 library(AFremover)
 set.seed(51773)
