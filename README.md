@@ -33,8 +33,8 @@ GLMs.
 ``` r
 library(AFremover)
 ## Read in images.
-imageFile1 = system.file("extdata","image1.tif", package = "AFremover")
-imageFile2 = system.file("extdata","image2.tif", package = "AFremover")
+imageFile1 = system.file("extdata","ImageB.CD3.tif", package = "AFremover")
+imageFile2 = system.file("extdata","ImageB.CD11c.tif", package = "AFremover")
 im1 <- EBImage::readImage(imageFile1)
 im2 <- EBImage::readImage(imageFile2)
 
@@ -42,7 +42,7 @@ im2 <- EBImage::readImage(imageFile2)
 im1 = im1/max(im1)
 im2 = im2/max(im2)
 
-combined <- EBImage::rgbImage(green=im1, red=im2)
+combined <- EBImage::rgbImage(green=sqrt(im1), red=sqrt(im2))
 EBImage::display(combined, all = TRUE, method = 'raster')
 ```
 
@@ -85,12 +85,12 @@ afMask <- afIdentify(mask, df, minSize = 100, maxSize = Inf, k = 20, kAuto = TRU
 ## Remove autofluorescence from images
 im1AFRemoved <- im1
 im2AFRemoved <- im2
-im1AFRemoved[afMask != 0] <- quantile(im1,0.25)
-im2AFRemoved[afMask != 0] <- quantile(im2,0.25)
+im1AFRemoved[afMask != 0] <- 0
+im2AFRemoved[afMask != 0] <- 0
 
-combinedRemoved <- EBImage::rgbImage(green = im1AFRemoved, red = im2AFRemoved)
+combinedRemoved <- EBImage::rgbImage(green = sqrt(im1AFRemoved), red = sqrt(im2AFRemoved))
 img_comb = EBImage::combine(combined, combinedRemoved)
-EBImage::display(img_comb, all = TRUE, method = 'raster')
+EBImage::display(img_comb, all = TRUE, method = 'raster',nx = 2)
 ```
 
 ![](man/figures/README-unnamed-chunk-2-2.png)<!-- -->
@@ -103,7 +103,11 @@ EBImage::display(img_comb, all = TRUE, method = 'raster')
 exclude1 = unique(mask1[afMask>0])
 mask1Removed = mask1
 mask1Removed[mask1Removed==exclude1] = 0
+#> Warning in e1@.Data == e2: longer object length is not a multiple of
+#> shorter object length
 exclude2 = unique(mask2[afMask>0])
 mask2Removed = mask2
 mask2Removed[mask2Removed==exclude2] = 0
+#> Warning in e1@.Data == e2: longer object length is not a multiple of
+#> shorter object length
 ```
