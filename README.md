@@ -102,12 +102,8 @@ EBImage::display(img_comb, all = TRUE, method = 'raster',nx = 2)
 
 exclude1 = unique(mask1[afMask>0])
 mask1Removed = mask1
-mask1Removed[mask1Removed==exclude1] = 0
-#> Warning in e1@.Data == e2: longer object length is not a multiple of
-#> shorter object length
+mask1Removed[mask1Removed%in%exclude1] = 0
 exclude2 = unique(mask2[afMask>0])
 mask2Removed = mask2
-mask2Removed[mask2Removed==exclude2] = 0
-#> Warning in e1@.Data == e2: longer object length is not a multiple of
-#> shorter object length
+mask2Removed[mask2Removed%in%exclude2] = 0
 ```
