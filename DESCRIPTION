@@ -1,11 +1,18 @@
 Package: AFremover
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Title: A method to identify and remove autofluorescent signals from multi-channel images post acquisition
+Version: 0.0.1
+Authors@R: c(
+    person(given = "Nicolas", family = "Canete", email = "ncan4475@uni.sydney.edu.au", role = c("aut", "cre")),
+    person(given = "Heeva", family = "Baharlou", email = "heeva.baharlou@sydney.edu.au", role = c("aut")),
+    person(given = "Ellis", family = "Patrick", email = "ellis.patrick@sydney.edu.au", role = c("aut"))
+    )
+Maintainer: Nicolas Canete <ncan4475@uni.sydney.edu.au>
+Description: Autofluorescence is a long-standing problem that has hindered fluorescence microscopy image analysis. To address this, we have developed a method that identifies and removes autofluorescent signals from multi-channel images post acquisition. 
+License: Unpublished, do not distribute.
 Encoding: UTF-8
-LazyData: true
+LazyData: false
+Imports:
+  EBImage,
+  moments
+RoxygenNote: 6.1.1
