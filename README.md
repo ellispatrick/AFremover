@@ -97,8 +97,9 @@ EBImage::display(img_comb, all = TRUE, method = 'raster',nx = 2)
 
 ``` r
 
-##Or
-##Exclude AF ROIs
+
+## Or
+## Exclude AF ROIs
 
 exclude1 = unique(mask1[afMask>0])
 mask1Removed = mask1
@@ -106,4 +107,18 @@ mask1Removed[mask1Removed%in%exclude1] = 0
 exclude2 = unique(mask2[afMask>0])
 mask2Removed = mask2
 mask2Removed[mask2Removed%in%exclude2] = 0
+
+
+## OR
+## A more agressive strategy to remove autofluorescence from images as an alternative to the halo removal implemented in ImageJ
+im1AFRemovedv2 <- im1
+im2AFRemovedv2 <- im2
+im1AFRemovedv2[!mask1%in%mask1Removed|!mask2%in%mask2Removed] <- 0
+im2AFRemovedv2[!mask1%in%mask1Removed|!mask2%in%mask2Removed] <- 0
+
+combinedRemovedv2 <- EBImage::rgbImage(green = sqrt(im1AFRemovedv2), red = sqrt(im2AFRemovedv2))
+img_combv2 = EBImage::combine(combined, combinedRemovedv2)
+EBImage::display(img_combv2, all = TRUE, method = 'raster',nx = 2)
 ```
+
+![](man/figures/README-unnamed-chunk-2-3.png)<!-- -->
