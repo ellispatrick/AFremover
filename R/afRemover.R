@@ -147,7 +147,7 @@ afIdentify <- function(mask, df, minSize = 100, maxSize = Inf, corr = -1, kAuto 
       t(t(dfToCluster[, cols]) / apply(dfToCluster[, cols], 2, sd, na.rm = TRUE))
 
     if (kAuto) {
-      kVals <- 3:20
+      kVals <- 2:k
       testVals <- numeric(length(kVals))
 
       clusterResults <- data.frame(matrix(length(kVals), nrow = nrow(dfToCluster)))
@@ -159,8 +159,7 @@ afIdentify <- function(mask, df, minSize = 100, maxSize = Inf, corr = -1, kAuto 
             dfToCluster[, cols],
             kVals[i],
             nstart = 20,
-            iter.max = 10000,
-            algorithm = 'Lloyd'
+            iter.max = 10000
           )
         clusterResults[[i]] <- dataCluster$cluster
 
@@ -176,7 +175,7 @@ afIdentify <- function(mask, df, minSize = 100, maxSize = Inf, corr = -1, kAuto 
         afClustNum[i] <- afID1
       }
 
-      x1 <- 3
+      x1 <- 2
       x2 <- k
       y1 <- testVals[1]
       y2 <- testVals[length(testVals)]
@@ -213,7 +212,7 @@ afIdentify <- function(mask, df, minSize = 100, maxSize = Inf, corr = -1, kAuto 
     clustAF <- TRUE
   }
 
-  afIdx <- df$No[corrAF & clustAF]
+  afIdx <- dfToCluster$No[corrAF & clustAF]
 
   afMask <- mask
   afMask[!(afMask %in% afIdx)] <- 0
