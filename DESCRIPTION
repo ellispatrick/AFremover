@@ -12,7 +12,6 @@ Description: Autofluorescence is a long-standing problem that has hindered fluor
 License: Unpublished, do not distribute.
 Encoding: UTF-8
 LazyData: false
-Imports:
-  EBImage,
-  moments
+biocViews: 
+Depends: moments, EBImage
 RoxygenNote: 6.1.1
