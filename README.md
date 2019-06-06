@@ -26,7 +26,7 @@ imageFile2 = system.file("extdata","ImageB.CD11c.tif", package = "AFremover")
 im1 <- EBImage::readImage(imageFile1)
 im2 <- EBImage::readImage(imageFile2)
 
-## Transform the image.
+## Rescale the images.
 im1 = im1/max(im1)
 im2 = im2/max(im2)
 
@@ -53,7 +53,7 @@ imThreshold2 <- mean(im2[tissue2]) + 2*sd(im2[tissue2])
 mask1 <- EBImage::bwlabel(im1 > imThreshold1)
 mask2 <- EBImage::bwlabel(im2 > imThreshold2)
 
-# Calculate intersection mask
+## Calculate intersection mask
 mask <- intMask(mask1,mask2)
 
 
