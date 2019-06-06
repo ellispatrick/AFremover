@@ -19,6 +19,8 @@ devtools::install_github("ellispatrick/AFremover")
 
 ``` r
 library(AFremover)
+#> Loading required package: moments
+#> Loading required package: EBImage
 set.seed(51773)
 ## Read in images.
 imageFile1 = system.file("extdata","ImageB.CD3.tif", package = "AFremover")
@@ -80,7 +82,7 @@ df <- afMeasure(im1, im2, mask)
 afMask <- afIdentify(mask, df, minSize = 100, maxSize = Inf, k = 20, kAuto = TRUE)
 
 
-## Remove autofluorescence from images
+## Remove autofluorescence from images (Use ImageJ for halo removal)
 im1AFRemoved <- im1
 im2AFRemoved <- im2
 im1AFRemoved[afMask != 0] <- 0
