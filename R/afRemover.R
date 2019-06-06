@@ -11,18 +11,13 @@ afMeasure <- function(im1, im2, mask, imBit = 16) {
 
   imDimension <- dim(im1) # Currently assumes all images the same size
 
-  im1 <- as.integer(im1*2^imBit)
-  im2 <- as.integer(im2*2^imBit)
-
-  mask <- as.integer(mask)
-
   im1PixelVals <- split(im1, mask)
   im2PixelVals <- split(im2, mask)
 
   im1PixelVals$"0" <- NULL
   im2PixelVals$"0" <- NULL
 
-  No <- 1:length(im1PixelVals)
+  No <- names(im1PixelVals)
   Size <- NULL
   Corr <- NULL
   SD1 <- NULL
@@ -30,7 +25,7 @@ afMeasure <- function(im1, im2, mask, imBit = 16) {
   Kurt1 <- NULL
   Kurt2 <- NULL
 
-  for (i in 1:length(im1PixelVals)) {
+  for (i in names(im1PixelVals)) {
     im1Pixels <- im1PixelVals[[i]]
     im2Pixels <- im2PixelVals[[i]]
 
@@ -218,4 +213,20 @@ afIdentify <- function(mask, df, minSize = 100, maxSize = Inf, corr = -1, kAuto 
   afMask[!(afMask %in% afIdx)] <- 0
 
   return(afMask)
+}
+
+
+
+#' Calculate a union of the intersection masks for two masks.
+#' @param mask1 A matrix containing a mask with annotated ROIs.
+#' @param mask2 A matrix containing a mask with annotated ROIs.
+#' @param minSize A numeric specifying the minimum number of pixels for a ROI to be retained.
+#' @export
+#' @return A matrix of a new mask.
+
+intMask <- function(mask1, mask2, minSize = 5) {
+mask <- mask1
+mask[] <-  as.numeric(as.factor(paste(mask1,mask2,'_')))-1
+mask[!mask%in%names(which(table(mask)>=minSize))] = 0
+mask
 }

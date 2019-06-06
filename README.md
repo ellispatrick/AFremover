@@ -54,10 +54,20 @@ mask1 <- EBImage::bwlabel(im1 > imThreshold1)
 mask2 <- EBImage::bwlabel(im2 > imThreshold2)
 
 # Calculate intersection mask
-mask <- EBImage::bwlabel(mask1>0&mask2>0)
+mask <- intMask(mask1,mask2)
+
 
 ## Calculate textural features.
 df <- afMeasure(im1, im2, mask)
+#> Warning in cor(im1Pixels, im2Pixels): the standard deviation is zero
+
+#> Warning in cor(im1Pixels, im2Pixels): the standard deviation is zero
+
+#> Warning in cor(im1Pixels, im2Pixels): the standard deviation is zero
+
+#> Warning in cor(im1Pixels, im2Pixels): the standard deviation is zero
+
+#> Warning in cor(im1Pixels, im2Pixels): the standard deviation is zero
 
 ## Alternatively
 ## Correlation only
